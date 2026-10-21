@@ -13,14 +13,18 @@ export default async function Home() {
         <p className={styles.subtitulo}>
           Aqui você pode organizar e gerenciar <br></br>suas figurinhas de My Little Pony.
         </p>
-          <img 
+
+        <img 
             src="/img/manesix.png" 
             alt="As Mane Six" 
             className={styles.imagemManeSix} 
           />
+        
         <Link href="/cadastro" className={styles.botaoCadastrar}>
           + Cadastrar nova figurinha
         </Link>
+
+    
 
       
       </div>

@@ -17,7 +17,7 @@ let figurinhas = [
         raridade: 'rara',
         quantidade: 2,
         descricao: 'A Princesa da Amizade!',
-        imagem: '/img/twilight.png'
+        imagem: '../img/twilight2.png'
     },
     {
         id: 2,
@@ -27,7 +27,7 @@ let figurinhas = [
         raridade: 'comum',
         quantidade: 4,
         descricao: 'A pônei mais rápida de Ponyville.',
-        imagem: '/img/rainbow.png'
+        imagem: '../img/rainbow.png'
     },
     {
         id: 3,
@@ -37,7 +37,7 @@ let figurinhas = [
         raridade: 'comum',
         quantidade: 3,
         descricao: 'Sempre pronta para uma festa!',
-        imagem: '/img/pinkie.png'
+        imagem: '../img/pinkiepie.png'
     },
     {
         id: 4,
@@ -75,7 +75,7 @@ let figurinhas = [
         id: 7,
         nome: 'Princesa Celestia',
         personagem: 'celestia',
-        colecao: 'realeza',
+        colecao: 'cristais',
         raridade: 'super_rara',
         quantidade: 1,
         descricao: 'A governante de Equestria que traz o Sol.',
@@ -85,7 +85,7 @@ let figurinhas = [
         id: 8,
         nome: 'Princesa Luna',
         personagem: 'luna',
-        colecao: 'realeza',
+        colecao: 'cristais',
         raridade: 'super_rara',
         quantidade: 1,
         descricao: 'A princesa da noite e guardiã dos sonhos.',

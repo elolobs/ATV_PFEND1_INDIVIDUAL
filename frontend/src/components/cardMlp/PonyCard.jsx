@@ -9,7 +9,7 @@ export default function PonyCard({ figurinha, deletarFigurinha }) {
   return (
     <div className="card-figurinha">
       <div className="card-imagem">
-        <img src={figurinha.imagem || "/img/padrao.png"} alt={figurinha.nome} />
+        { <img src={figurinha.imagem || "/img/padrao.png"} alt={figurinha.nome} /> }
       </div>
       
       <div className="card-info">

@@ -1,11 +1,9 @@
 "use client"
+import React, { useState, useEffect } from "react"; 
 import Link from "next/link";
 import PonyCard from "../../components/cardMlp/PonyCard.jsx";
 import "./figurinha.css";
 
-/* ====================================================================
-   CÓDIGO DINÂMICO (COMENTADO) - USE QUANDO O BACKEND ESTIVER PRONTO!
-   ====================================================================
 export default function FigurinhaPage() {
   const [figurinhas, setFigurinhas] = useState([]);
 
@@ -29,7 +27,9 @@ export default function FigurinhaPage() {
     <div className="background-container">
       <main className="lista-container">
         <div className="lista-header">
-          <h2><i className="fa-solid fa-star iconeEstrela"></i> Minhas Figurinhas</h2>
+          <h2>
+            <i className="fa-solid fa-star iconeEstrela"></i> Minhas Figurinhas
+          </h2>
           <Link href="/cadastro" className="btn-nova-figurinha">
             + Nova figurinha
           </Link>
@@ -40,10 +40,10 @@ export default function FigurinhaPage() {
             <p className="mensagem-vazia">Nenhuma figurinha cadastrada ainda.</p>
           ) : (
             figurinhas.map((figurinha) => (
-              <PonyCard 
-                key={figurinha.id} 
-                figurinha={figurinha} 
-                deletarFigurinha={deletarFigurinha} 
+              <PonyCard
+                key={figurinha.id}
+                figurinha={figurinha}
+                deletarFigurinha={deletarFigurinha}
               />
             ))
           )}
@@ -52,12 +52,10 @@ export default function FigurinhaPage() {
     </div>
   );
 }
-==================================================================== */
 
 
-// ====================================================================
-// CÓDIGO ESTÁTICO - PARA TESTAR O CSS AGORA
-// ====================================================================
+
+/*
 export default function FigurinhaPage() {
   
   // Usamos um array falso só para o map() desenhar os cards na tela e testarmos o layout
@@ -99,7 +97,7 @@ export default function FigurinhaPage() {
         </div>
 
         <div className="grid-figurinhas">
-          {/* Mapeia os dados falsos e gera 3 componentes PonyCard para ver como fica a estilização */}
+         
           {figurinhasEstaticas.map((figurinha) => (
             <PonyCard key={figurinha.id} figurinha={figurinha} />
           ))}
@@ -108,3 +106,4 @@ export default function FigurinhaPage() {
     </div>
   );
 }
+*/

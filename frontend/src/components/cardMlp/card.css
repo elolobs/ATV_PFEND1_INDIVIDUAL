@@ -1,0 +1,99 @@
+/* Estilos exclusivos do componente PonyCard */
+
+.card-figurinha {
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  position: relative;
+  border: 1px solid #f0f0f0;
+}
+
+.card-imagem {
+  width: 100%;
+  height: 180px;
+  margin: 0 auto 15px auto;
+  border-radius: 8px;
+  background-color: #f8f4ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Deixa a imagem com formato de figurinha (quadrada/retangular) que ajustamos antes */
+.card-imagem img {
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.card-info h3 {
+  color: #333;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.colecao {
+  color: #888;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.tag-raridade {
+  color: white;
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.quantidade {
+  color: #333;
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin: 5px 0 0 0;
+}
+
+.card-acoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.btn-editar, .btn-excluir {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.btn-editar {
+  background-color: #8a4dd8;
+  color: white;
+}
+
+.btn-excluir {
+  background-color: #ff6b81;
+  color: white;
+}
+
+.btn-editar:hover, .btn-excluir:hover {
+  opacity: 0.8;
+}

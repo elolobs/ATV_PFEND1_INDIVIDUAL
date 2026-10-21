@@ -7,16 +7,17 @@ export const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Array de figurinhas em memória (já populado para você testar o visual!)
 let figurinhas = [
-   {
+    // --- MANE SIX ---
+    {
         id: 1,
         nome: 'Twilight Sparkle',
         personagem: 'twilight',
         colecao: 'magia_amizade',
         raridade: 'rara',
         quantidade: 2,
-        descricao: 'A Princesa da Amizade!'
+        descricao: 'A Princesa da Amizade!',
+        imagem: '/img/twilight.png'
     },
     {
         id: 2,
@@ -25,7 +26,8 @@ let figurinhas = [
         colecao: 'magia_amizade',
         raridade: 'comum',
         quantidade: 4,
-        descricao: 'A pônei mais rápida de Ponyville.'
+        descricao: 'A pônei mais rápida de Ponyville.',
+        imagem: '/img/rainbow.png'
     },
     {
         id: 3,
@@ -34,7 +36,8 @@ let figurinhas = [
         colecao: 'magia_amizade',
         raridade: 'comum',
         quantidade: 3,
-        descricao: 'Sempre pronta para uma festa!'
+        descricao: 'Sempre pronta para uma festa!',
+        imagem: '/img/pinkie.png'
     },
     {
         id: 4,
@@ -43,7 +46,8 @@ let figurinhas = [
         colecao: 'magia_amizade',
         raridade: 'comum',
         quantidade: 5,
-        descricao: 'A pônei mais honesta do Rancho Maçã Doce.'
+        descricao: 'A pônei mais honesta do Rancho Maçã Doce.',
+        imagem: '/img/applejack.png'
     },
     {
         id: 5,
@@ -52,7 +56,8 @@ let figurinhas = [
         colecao: 'magia_amizade',
         raridade: 'rara',
         quantidade: 2,
-        descricao: 'Fabulosa, generosa e cheia de estilo.'
+        descricao: 'Fabulosa, generosa e cheia de estilo.',
+        imagem: '/img/rarity.png'
     },
     {
         id: 6,
@@ -61,7 +66,8 @@ let figurinhas = [
         colecao: 'magia_amizade',
         raridade: 'comum',
         quantidade: 3,
-        descricao: 'Tímida e a melhor amiga dos animais.'
+        descricao: 'Tímida e a melhor amiga dos animais.',
+        imagem: '/img/fluttershy.png'
     },
 
     // --- PRINCESAS ---
@@ -72,7 +78,8 @@ let figurinhas = [
         colecao: 'realeza',
         raridade: 'super_rara',
         quantidade: 1,
-        descricao: 'A governante de Equestria que traz o Sol.'
+        descricao: 'A governante de Equestria que traz o Sol.',
+        imagem: '/img/celestia.png'
     },
     {
         id: 8,
@@ -81,7 +88,8 @@ let figurinhas = [
         colecao: 'realeza',
         raridade: 'super_rara',
         quantidade: 1,
-        descricao: 'A princesa da noite e guardiã dos sonhos.'
+        descricao: 'A princesa da noite e guardiã dos sonhos.',
+        imagem: '/img/luna.png'
     },
     {
         id: 9,
@@ -90,7 +98,8 @@ let figurinhas = [
         colecao: 'realeza',
         raridade: 'rara',
         quantidade: 2,
-        descricao: 'A princesa do amor e do Império de Cristal.'
+        descricao: 'A princesa do amor e do Império de Cristal.',
+        imagem: '/img/cadance.png'
     },
 
     // --- ALIADOS E OUTROS ---
@@ -101,7 +110,8 @@ let figurinhas = [
         colecao: 'caos_e_magia',
         raridade: 'super_rara',
         quantidade: 1,
-        descricao: 'O draconequus mestre do caos e da desordem!'
+        descricao: 'O draconequus mestre do caos e da desordem!',
+        imagem: '/img/discordia.png'
     },
     {
         id: 11,
@@ -110,7 +120,8 @@ let figurinhas = [
         colecao: 'aliados',
         raridade: 'comum',
         quantidade: 6,
-        descricao: 'O dragão número um e assistente fiel da Twilight.'
+        descricao: 'O dragão número um e assistente fiel da Twilight.',
+        imagem: '/img/spike.png'
     },
     {
         id: 12,
@@ -119,7 +130,8 @@ let figurinhas = [
         colecao: 'magia_amizade',
         raridade: 'rara',
         quantidade: 2,
-        descricao: 'Uma unicórnio poderosa com um talento incrível para magia.'
+        descricao: 'Uma unicórnio poderosa com um talento incrível.',
+        imagem: '/img/starlight.png'
     },
     {
         id: 13,
@@ -128,7 +140,8 @@ let figurinhas = [
         colecao: 'aliados',
         raridade: 'rara',
         quantidade: 1,
-        descricao: 'A ilusionista mais teatral de toda Equestria!'
+        descricao: 'A ilusionista mais teatral de toda Equestria!',
+        imagem: '/img/trixie.png'
     },
 
     // --- VILÕES ---
@@ -139,7 +152,8 @@ let figurinhas = [
         colecao: 'viloes',
         raridade: 'super_rara',
         quantidade: 1,
-        descricao: 'A temível Rainha dos Mutantes (Changelings).'
+        descricao: 'A temível Rainha dos Mutantes.',
+        imagem: '/img/chrysalis.png'
     },
     {
         id: 15,
@@ -148,7 +162,8 @@ let figurinhas = [
         colecao: 'viloes',
         raridade: 'super_rara',
         quantidade: 1,
-        descricao: 'O antigo e sombrio governante do Império de Cristal.'
+        descricao: 'O antigo e sombrio governante do Império de Cristal.',
+        imagem: '/img/sombra.png'
     }
 ];
 

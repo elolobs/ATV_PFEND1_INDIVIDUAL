@@ -1,12 +1,9 @@
-import Image from "next/image";
+
 import styles from "./page.module.css";
 import Link from "next/link";
 
 
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
 export default async function Home() {
-  await sleep(3500);
 
   return (
     <>
@@ -16,9 +13,16 @@ export default async function Home() {
         <p className={styles.subtitulo}>
           Aqui você pode organizar e gerenciar <br></br>suas figurinhas de My Little Pony.
         </p>
-        <Link href="/cadastrar" className={styles.botaoCadastrar}>
+          <img 
+            src="/img/manesix.png" 
+            alt="As Mane Six" 
+            className={styles.imagemManeSix} 
+          />
+        <Link href="/cadastro" className={styles.botaoCadastrar}>
           + Cadastrar nova figurinha
         </Link>
+
+      
       </div>
     </main>
     </>

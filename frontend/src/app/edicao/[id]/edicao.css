@@ -1,0 +1,154 @@
+.cadastro-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  font-family: Arial, Helvetica, sans-serif;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+  background: url("/img/background-fantasia.png") center / cover no-repeat;
+}
+
+
+
+.cadastro-header {
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 15px;
+}
+
+.cadastro-header h2 {
+  color: #5d2e9e;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.cadastro-card {
+  background-color: #ffffffb3;
+  border-radius: 20px;
+  padding: 30px;
+  display: flex;
+  gap: 40px;
+  width: 100%;
+  max-width: 800px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.cadastro-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-group label {
+  color: #5d2e9e;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.form-group label span {
+  color: #e74c3c;
+}
+
+.form-group input,
+.form-group select {
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #555;
+  outline: none;
+  background-color: white;
+}
+
+.form-group input::placeholder,
+.form-group select:invalid {
+  color: #aaa;
+}
+
+.btn-salvar {
+  background-color: #8a4dd8;
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.btn-salvar:hover {
+  background-color: #7138b7;
+}
+
+.cadastro-imagem-section {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.upload-box {
+  background-color: #f8f4ff;
+  border: 1px dashed #c4b5fd;
+  border-radius: 15px;
+  padding: 40px 20px;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.upload-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.upload-title {
+  color: #5d2e9e;
+  font-weight: bold;
+  margin: 0 0 5px 0;
+  font-size: 0.95rem;
+}
+
+.upload-subtitle {
+  color: #888;
+  font-size: 0.75rem;
+  margin: 0;
+}
+
+.pony-illustration img {
+  width: 100%;
+  max-width: 180px;
+  height: auto;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .cadastro-card {
+    flex-direction: column;
+  }
+  
+  .cadastro-imagem-section {
+    width: 100%;
+  }
+}
+
+.iconeEstrela {
+  color: #FFD43B; 
+  margin-right: 12px; 
+  font-size: 1.75rem; 
+  vertical-align: middle; 
+}

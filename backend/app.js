@@ -7,23 +7,148 @@ export const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Array de produtos em memória
-let produtos = [
-    {
+// Array de figurinhas em memória (já populado para você testar o visual!)
+let figurinhas = [
+   {
         id: 1,
-        nome: 'Army Bomb',
-        categoria: 'Lightstick',
-        descricao: 'Lightstick do BTS',
-        preco: 350,
-        quantidade: 5
+        nome: 'Twilight Sparkle',
+        personagem: 'twilight',
+        colecao: 'magia_amizade',
+        raridade: 'rara',
+        quantidade: 2,
+        descricao: 'A Princesa da Amizade!'
     },
     {
         id: 2,
-        nome: 'Álbum BTS',
-        categoria: 'Álbum',
-        descricao: 'Álbum de música do BTS',
-        preco: 120,
-        quantidade: 10
+        nome: 'Rainbow Dash',
+        personagem: 'rainbow',
+        colecao: 'magia_amizade',
+        raridade: 'comum',
+        quantidade: 4,
+        descricao: 'A pônei mais rápida de Ponyville.'
+    },
+    {
+        id: 3,
+        nome: 'Pinkie Pie',
+        personagem: 'pinkie',
+        colecao: 'magia_amizade',
+        raridade: 'comum',
+        quantidade: 3,
+        descricao: 'Sempre pronta para uma festa!'
+    },
+    {
+        id: 4,
+        nome: 'Applejack',
+        personagem: 'applejack',
+        colecao: 'magia_amizade',
+        raridade: 'comum',
+        quantidade: 5,
+        descricao: 'A pônei mais honesta do Rancho Maçã Doce.'
+    },
+    {
+        id: 5,
+        nome: 'Rarity',
+        personagem: 'rarity',
+        colecao: 'magia_amizade',
+        raridade: 'rara',
+        quantidade: 2,
+        descricao: 'Fabulosa, generosa e cheia de estilo.'
+    },
+    {
+        id: 6,
+        nome: 'Fluttershy',
+        personagem: 'fluttershy',
+        colecao: 'magia_amizade',
+        raridade: 'comum',
+        quantidade: 3,
+        descricao: 'Tímida e a melhor amiga dos animais.'
+    },
+
+    // --- PRINCESAS ---
+    {
+        id: 7,
+        nome: 'Princesa Celestia',
+        personagem: 'celestia',
+        colecao: 'realeza',
+        raridade: 'super_rara',
+        quantidade: 1,
+        descricao: 'A governante de Equestria que traz o Sol.'
+    },
+    {
+        id: 8,
+        nome: 'Princesa Luna',
+        personagem: 'luna',
+        colecao: 'realeza',
+        raridade: 'super_rara',
+        quantidade: 1,
+        descricao: 'A princesa da noite e guardiã dos sonhos.'
+    },
+    {
+        id: 9,
+        nome: 'Princesa Cadance',
+        personagem: 'cadance',
+        colecao: 'realeza',
+        raridade: 'rara',
+        quantidade: 2,
+        descricao: 'A princesa do amor e do Império de Cristal.'
+    },
+
+    // --- ALIADOS E OUTROS ---
+    {
+        id: 10,
+        nome: 'Discórdia',
+        personagem: 'discordia',
+        colecao: 'caos_e_magia',
+        raridade: 'super_rara',
+        quantidade: 1,
+        descricao: 'O draconequus mestre do caos e da desordem!'
+    },
+    {
+        id: 11,
+        nome: 'Spike',
+        personagem: 'spike',
+        colecao: 'aliados',
+        raridade: 'comum',
+        quantidade: 6,
+        descricao: 'O dragão número um e assistente fiel da Twilight.'
+    },
+    {
+        id: 12,
+        nome: 'Starlight Glimmer',
+        personagem: 'starlight',
+        colecao: 'magia_amizade',
+        raridade: 'rara',
+        quantidade: 2,
+        descricao: 'Uma unicórnio poderosa com um talento incrível para magia.'
+    },
+    {
+        id: 13,
+        nome: 'A Grande e Poderosa Trixie',
+        personagem: 'trixie',
+        colecao: 'aliados',
+        raridade: 'rara',
+        quantidade: 1,
+        descricao: 'A ilusionista mais teatral de toda Equestria!'
+    },
+
+    // --- VILÕES ---
+    {
+        id: 14,
+        nome: 'Rainha Chrysalis',
+        personagem: 'chrysalis',
+        colecao: 'viloes',
+        raridade: 'super_rara',
+        quantidade: 1,
+        descricao: 'A temível Rainha dos Mutantes (Changelings).'
+    },
+    {
+        id: 15,
+        nome: 'Rei Sombra',
+        personagem: 'sombra',
+        colecao: 'viloes',
+        raridade: 'super_rara',
+        quantidade: 1,
+        descricao: 'O antigo e sombrio governante do Império de Cristal.'
     }
 ];
 
@@ -31,115 +156,118 @@ let produtos = [
 app.get('/api/check', (req, res) => {
     res.status(200).json({
         status: 'ok',
-        mensagem: 'Servidor funcionando via HTTP!'
+        mensagem: 'Servidor das figurinhas funcionando via HTTP!'
     });
 });
 
-// READ — listar todos os produtos
-app.get('/api/produtos', (req, res) => {
-    res.status(200).json(produtos);
+// READ — listar todas as figurinhas
+app.get('/api/figurinhas', (req, res) => {
+    res.status(200).json(figurinhas);
 });
 
-// READ — buscar produto por ID
-app.get('/api/produtos/:id', (req, res) => {
+// READ — buscar figurinha por ID
+app.get('/api/figurinhas/:id', (req, res) => {
     const id = Number(req.params.id);
 
-    const produto = produtos.find((p) => p.id === id);
+    const figurinha = figurinhas.find((f) => f.id === id);
 
-    if (!produto) {
+    if (!figurinha) {
         return res.status(404).json({
-            erro: 'Produto não encontrado'
+            erro: 'Figurinha não encontrada'
         });
     }
 
-    res.status(200).json(produto);
+    res.status(200).json(figurinha);
 });
 
-// CREATE — cadastrar produto
-app.post('/api/produtos', (req, res) => {
-    const { nome, categoria, descricao, preco, quantidade } = req.body;
+// CREATE — cadastrar nova figurinha
+app.post('/api/figurinhas', (req, res) => {
+    const { nome, personagem, colecao, raridade, quantidade, descricao } = req.body;
 
+    // Validação dos dados obrigatórios
     if (
         typeof nome !== 'string' || !nome.trim() ||
-        typeof categoria !== 'string' || !categoria.trim() ||
-        typeof descricao !== 'string' || !descricao.trim() ||
-        !Number.isFinite(preco) || preco < 0 ||
-        !Number.isInteger(quantidade) || quantidade < 0
+        typeof personagem !== 'string' || !personagem.trim() ||
+        typeof colecao !== 'string' || !colecao.trim() ||
+        typeof raridade !== 'string' || !raridade.trim() ||
+        !Number.isInteger(Number(quantidade)) || Number(quantidade) < 1
     ) {
         return res.status(400).json({
-            erro: 'Dados do produto inválidos'
+            erro: 'Dados da figurinha inválidos'
         });
     }
 
-    const novoProduto = {
-        id: produtos.length > 0
-            ? Math.max(...produtos.map((p) => p.id)) + 1
+    const novaFigurinha = {
+        id: figurinhas.length > 0
+            ? Math.max(...figurinhas.map((f) => f.id)) + 1
             : 1,
         nome: nome.trim(),
-        categoria: categoria.trim(),
-        descricao: descricao.trim(),
-        preco,
-        quantidade
+        personagem: personagem.trim(),
+        colecao: colecao.trim(),
+        raridade: raridade.trim(),
+        quantidade: Number(quantidade),
+        descricao: descricao ? descricao.trim() : '' // Descrição é opcional
     };
 
-    produtos.push(novoProduto);
+    figurinhas.push(novaFigurinha);
 
-    res.status(201).json(novoProduto);
+    res.status(201).json(novaFigurinha);
 });
 
-// UPDATE — atualizar produto
-app.put('/api/produtos/:id', (req, res) => {
+// UPDATE — atualizar figurinha
+app.put('/api/figurinhas/:id', (req, res) => {
     const id = Number(req.params.id);
-    const indice = produtos.findIndex((p) => p.id === id);
+    const indice = figurinhas.findIndex((f) => f.id === id);
 
     if (indice === -1) {
         return res.status(404).json({
-            erro: 'Produto não encontrado'
+            erro: 'Figurinha não encontrada'
         });
     }
 
-    const { nome, categoria, descricao, preco, quantidade } = req.body;
+    const { nome, personagem, colecao, raridade, quantidade, descricao } = req.body;
 
     if (
         typeof nome !== 'string' || !nome.trim() ||
-        typeof categoria !== 'string' || !categoria.trim() ||
-        typeof descricao !== 'string' || !descricao.trim() ||
-        !Number.isFinite(preco) || preco < 0 ||
-        !Number.isInteger(quantidade) || quantidade < 0
+        typeof personagem !== 'string' || !personagem.trim() ||
+        typeof colecao !== 'string' || !colecao.trim() ||
+        typeof raridade !== 'string' || !raridade.trim() ||
+        !Number.isInteger(Number(quantidade)) || Number(quantidade) < 1
     ) {
         return res.status(400).json({
-            erro: 'Dados do produto inválidos'
+            erro: 'Dados da figurinha inválidos'
         });
     }
 
-    produtos[indice] = {
+    figurinhas[indice] = {
         id,
         nome: nome.trim(),
-        categoria: categoria.trim(),
-        descricao: descricao.trim(),
-        preco,
-        quantidade
+        personagem: personagem.trim(),
+        colecao: colecao.trim(),
+        raridade: raridade.trim(),
+        quantidade: Number(quantidade),
+        descricao: descricao ? descricao.trim() : ''
     };
 
-    res.status(200).json(produtos[indice]);
+    res.status(200).json(figurinhas[indice]);
 });
 
-// DELETE — excluir produto
-app.delete('/api/produtos/:id', (req, res) => {
+// DELETE — excluir figurinha
+app.delete('/api/figurinhas/:id', (req, res) => {
     const id = Number(req.params.id);
 
-    const produtoExiste = produtos.some((p) => p.id === id);
+    const figurinhaExiste = figurinhas.some((f) => f.id === id);
 
-    if (!produtoExiste) {
+    if (!figurinhaExiste) {
         return res.status(404).json({
-            erro: 'Produto não encontrado'
+            erro: 'Figurinha não encontrada'
         });
     }
 
-    produtos = produtos.filter((p) => p.id !== id);
+    figurinhas = figurinhas.filter((f) => f.id !== id);
 
     res.status(200).json({
-        mensagem: 'Produto excluído com sucesso'
+        mensagem: 'Figurinha excluída com sucesso'
     });
 });
 

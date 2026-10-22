@@ -1,11 +1,41 @@
 import express from 'express';
 import cors from 'cors';
+import multer from 'multer';
+import { mkdirSync } from 'node:fs';
+import { randomUUID } from 'node:crypto';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
 
 export const app = express();
+const uploadDir = path.join(path.dirname(fileURLToPath(import.meta.url)), 'uploads');
+mkdirSync(uploadDir, { recursive: true });
 
-// Middlewares
+const extensoesPermitidas = {
+    'image/jpeg': '.jpg',
+    'image/png': '.png',
+    'image/gif': '.gif',
+    'image/webp': '.webp'
+};
+
+const uploadImagem = multer({
+    storage: multer.diskStorage({
+        destination: uploadDir,
+        filename: (_req, file, callback) => {
+            callback(null, `${randomUUID()}${extensoesPermitidas[file.mimetype]}`);
+        }
+    }),
+    limits: { fileSize: 5 * 1024 * 1024 },
+    fileFilter: (_req, file, callback) => {
+        if (!extensoesPermitidas[file.mimetype]) {
+            return callback(new Error('Envie uma imagem PNG, JPEG, GIF ou WEBP.'));
+        }
+        callback(null, true);
+    }
+});
+
 app.use(cors());
 app.use(express.json());
+app.use('/uploads', express.static(uploadDir));
 
 let figurinhas = [
     // --- MANE SIX ---
@@ -167,7 +197,6 @@ let figurinhas = [
     }
 ];
 
-// Rota para testar o servidor
 app.get('/api/check', (req, res) => {
     res.status(200).json({
         status: 'ok',
@@ -175,12 +204,29 @@ app.get('/api/check', (req, res) => {
     });
 });
 
-// READ — listar todas as figurinhas
+app.post('/api/upload', (req, res, next) => {
+    uploadImagem.single('imagem')(req, res, (erro) => {
+        if (erro) {
+            return res.status(400).json({
+                erro: erro.message || 'Não foi possível enviar a imagem.'
+            });
+        }
+        next();
+    });
+}, (req, res) => {
+    if (!req.file) {
+        return res.status(400).json({ erro: 'Selecione uma imagem para enviar.' });
+    }
+
+    res.status(201).json({
+        imagem: `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`
+    });
+});
+
 app.get('/api/figurinhas', (req, res) => {
     res.status(200).json(figurinhas);
 });
 
-// READ — buscar figurinha por ID
 app.get('/api/figurinhas/:id', (req, res) => {
     const id = Number(req.params.id);
 
@@ -195,11 +241,9 @@ app.get('/api/figurinhas/:id', (req, res) => {
     res.status(200).json(figurinha);
 });
 
-// CREATE — cadastrar nova figurinha
 app.post('/api/figurinhas', (req, res) => {
-    const { nome, personagem, colecao, raridade, quantidade, descricao } = req.body;
+    const { nome, personagem, colecao, raridade, quantidade, descricao, imagem } = req.body;
 
-    // Validação dos dados obrigatórios
     if (
         typeof nome !== 'string' || !nome.trim() ||
         typeof personagem !== 'string' || !personagem.trim() ||
@@ -221,7 +265,8 @@ app.post('/api/figurinhas', (req, res) => {
         colecao: colecao.trim(),
         raridade: raridade.trim(),
         quantidade: Number(quantidade),
-        descricao: descricao ? descricao.trim() : '' // Descrição é opcional
+        descricao: descricao ? descricao.trim() : '',
+        imagem: typeof imagem === 'string' && imagem.trim() ? imagem.trim() : ''
     };
 
     figurinhas.push(novaFigurinha);
@@ -229,7 +274,6 @@ app.post('/api/figurinhas', (req, res) => {
     res.status(201).json(novaFigurinha);
 });
 
-// UPDATE — atualizar figurinha
 app.put('/api/figurinhas/:id', (req, res) => {
     const id = Number(req.params.id);
     const indice = figurinhas.findIndex((f) => f.id === id);
@@ -240,7 +284,7 @@ app.put('/api/figurinhas/:id', (req, res) => {
         });
     }
 
-    const { nome, personagem, colecao, raridade, quantidade, descricao } = req.body;
+    const { nome, personagem, colecao, raridade, quantidade, descricao, imagem } = req.body;
 
     if (
         typeof nome !== 'string' || !nome.trim() ||
@@ -261,13 +305,15 @@ app.put('/api/figurinhas/:id', (req, res) => {
         colecao: colecao.trim(),
         raridade: raridade.trim(),
         quantidade: Number(quantidade),
-        descricao: descricao ? descricao.trim() : ''
+        descricao: descricao ? descricao.trim() : '',
+        imagem: typeof imagem === 'string' && imagem.trim()
+            ? imagem.trim()
+            : figurinhas[indice].imagem
     };
 
     res.status(200).json(figurinhas[indice]);
 });
 
-// DELETE — excluir figurinha
 app.delete('/api/figurinhas/:id', (req, res) => {
     const id = Number(req.params.id);
 
@@ -286,14 +332,12 @@ app.delete('/api/figurinhas/:id', (req, res) => {
     });
 });
 
-// Middleware 404 — manter por último entre as rotas
 app.use((req, res) => {
     res.status(404).json({
         erro: `A rota ${req.method} ${req.originalUrl} não existe`
     });
 });
 
-// Middleware de erros
 app.use((erro, req, res, _next) => {
     console.error('Erro de Sistema:', erro.message);
 
